@@ -101,7 +101,7 @@ img {
 }
 
 .nav-logo img {
-  height: 28px;
+  height: 65px;
   width: auto;
 }
 
@@ -141,7 +141,7 @@ img {
 /* ---------------- Typography helpers ---------------- */
 
 .eyebrow {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text-3);
@@ -221,14 +221,15 @@ p {
 
 /* ---------------- Sections / fade-in on scroll ---------------- */
 
-section {
-  padding: 96px 0;
+section.wrap {
+  padding-top: 65px;
+  padding-bottom: 65px;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 1.1s var(--ease-organic), transform 1.1s var(--ease-organic);
+  transform: translateY(6px);
+  transition: opacity 0.9s var(--ease-organic), transform 0.9s var(--ease-organic);
 }
 
 .reveal.is-visible {
@@ -253,12 +254,13 @@ hr.divider {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 26px;
-  padding: 48px 0 12px;
+  gap: 35px;
+  padding: 32px 0 12px;
 }
 
 .breath-circle {
   border-radius: 999px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,79 +268,139 @@ hr.divider {
 }
 
 .breath-chest {
-  width: 108px;
-  height: 108px;
+  width: clamp(138px, 14vw, 152px);
+  height: clamp(138px, 14vw, 152px);
   background: var(--circle-chest);
   animation: breathChest 11.6s var(--ease-organic) infinite;
 }
 
 .breath-belly {
-  width: 142px;
-  height: 142px;
+  width: clamp(178px, 18vw, 196px);
+  height: clamp(178px, 18vw, 196px);
   background: var(--circle-belly);
   animation: breathBelly 11.6s var(--ease-organic) infinite;
 }
 
 .breath-label {
-  font-size: 14px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(14px, 1.6vw, 17px);
   font-weight: 300;
   letter-spacing: 0.4px;
   color: var(--text-1);
   opacity: 0;
+  padding: 0 18px;
   transition: opacity 0.3s ease;
-  padding: 0 14px;
 }
 
-/* Percent map of an 11.6s cycle:
-   0 -> 16.4%   belly out (0 - 1.9s)
-   16.4 -> 34%  chest up  (1.9 - 4.0s, with overlap baked in)
-   34 -> 53%    hold (4.0 - 6.1s)
-   53 -> 100%   release (6.1 - 11.6s) */
+/* ---------------------------------------------------------------------
+   Timing derived directly from learn_page.dart:
+     bellySeconds = 1.9, chestSeconds = 2.0, holdSeconds = 2.2,
+     exhaleSeconds = 5.5, textDelay = 0.2, overlap = 0.5
+     total = 11.6s
+
+   Scale (circle growth) boundaries:
+     chest starts growing : 1.4s  (12.07%)
+     belly reaches full   : 1.9s  (16.38%)
+     chest reaches full   : 3.9s  (33.62%)
+     hold ends / exhale starts : 6.1s (52.59%)
+
+   Text boundaries (note: text changes CONTENT, it does not blink
+   off and on — "belly out" stays on screen continuously until it
+   becomes "hold and feel", same for chest's "chest up"):
+     chest text appears ("chest up")     : 2.1s (18.10%)
+     both switch to "hold and feel"      : 4.1s (35.34%)
+     both switch to "release"            : 7.0s (60.34%)
+     loops back to "belly out" / empty at 11.6s (100%)
+   --------------------------------------------------------------------- */
 
 @keyframes breathBelly {
-  0%   { transform: scale(1); }
-  16%  { transform: scale(1.18); }
-  53%  { transform: scale(1.18); }
-  100% { transform: scale(1); }
+  0%      { transform: scale(1); }
+  16.38%  { transform: scale(1.18); }
+  52.59%  { transform: scale(1.18); }
+  100%    { transform: scale(1); }
 }
 
 @keyframes breathChest {
-  0%   { transform: scale(1); }
-  12%  { transform: scale(1); }
-  34%  { transform: scale(1.22); }
-  53%  { transform: scale(1.22); }
-  100% { transform: scale(1); }
+  0%      { transform: scale(1); }
+  12.07%  { transform: scale(1); }
+  33.62%  { transform: scale(1.22); }
+  52.59%  { transform: scale(1.22); }
+  100%    { transform: scale(1); }
 }
 
-.breath-belly .breath-label { animation: labelBelly 11.6s linear infinite; }
-.breath-chest .breath-label { animation: labelChest 11.6s linear infinite; }
+/* Belly circle: "belly out" (0 -> 35.34%) -> "hold and feel" (35.34 -> 60.34%) -> "release" (60.34 -> 100%) */
+.label-belly-out { animation: lblBellyOut 11.6s linear infinite; }
 
-@keyframes labelBelly {
-  0%    { opacity: 1; }
-  15%   { opacity: 1; }
-  17%   { opacity: 0; }
-  34%   { opacity: 0; }
-  36%   { opacity: 1; }
-  53%   { opacity: 1; }
-  55%   { opacity: 0; }
-  99%   { opacity: 0; }
-  100%  { opacity: 1; }
+@keyframes lblBellyOut {
+  0%      { opacity: 1; }
+  35.34%  { opacity: 1; }
+  35.84%  { opacity: 0; }
+  100%    { opacity: 0; }
 }
 
-@keyframes labelChest {
-  0%    { opacity: 0; }
-  16%   { opacity: 0; }
-  18%   { opacity: 1; }
-  53%   { opacity: 1; }
-  55%   { opacity: 0; }
-  99%   { opacity: 0; }
-  100%  { opacity: 0; }
+/* Chest circle: empty (0 -> 18.10%) -> "chest up" (18.10 -> 35.34%) -> "hold and feel" (35.34 -> 60.34%) -> "release" (60.34 -> 100%) */
+.label-chest-up { animation: lblChestUp 11.6s linear infinite; }
+
+@keyframes lblChestUp {
+  0%      { opacity: 0; }
+  18.10%  { opacity: 0; }
+  18.60%  { opacity: 1; }
+  35.34%  { opacity: 1; }
+  35.84%  { opacity: 0; }
+  100%    { opacity: 0; }
+}
+
+/* Shared "hold and feel" — appears in BOTH circles at the same time */
+.label-hold { animation: lblHold 11.6s linear infinite; }
+
+@keyframes lblHold {
+  0%      { opacity: 0; }
+  35.34%  { opacity: 0; }
+  35.84%  { opacity: 1; }
+  60.34%  { opacity: 1; }
+  60.84%  { opacity: 0; }
+  100%    { opacity: 0; }
+}
+
+/* Shared "release" — appears in BOTH circles at the same time, through to loop end */
+.label-release { animation: lblRelease 11.6s linear infinite; }
+
+@keyframes lblRelease {
+  0%      { opacity: 0; }
+  60.34%  { opacity: 0; }
+  60.84%  { opacity: 1; }
+  100%    { opacity: 1; }
 }
 
 .breath-caption {
   font-size: 13px;
   color: var(--text-3);
   letter-spacing: 0.5px;
+}
+
+/* ---------------- Hero scroll cue ---------------- */
+
+.scroll-cue {
+  display: flex;
+  justify-content: center;
+  margin-top: 72px;
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 46px;
+  transform-origin: top center;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0));
+  animation: scrollCuePulse 3.2s var(--ease-organic) infinite;
+}
+
+@keyframes scrollCuePulse {
+  0%, 100% { transform: scaleY(0.65); opacity: 0.35; }
+  50%      { transform: scaleY(1.13); opacity: 0.85; }
 }
 
 /* ---------------- Footer ---------------- */
@@ -422,13 +484,21 @@ footer .copyright {
 
 .faq-chevron {
   flex-shrink: 0;
+  display: inline-flex;
+  width: 13px;
+  height: 13px;
   color: var(--text-4);
-  transition: transform 0.3s var(--ease-organic);
-  font-size: 13px;
+  transition: transform 0.35s var(--ease-organic), color 0.3s var(--ease-organic);
+}
+
+.faq-chevron svg {
+  width: 100%;
+  height: 100%;
 }
 
 .faq-item.open .faq-chevron {
   transform: rotate(180deg);
+  color: var(--text-2);
 }
 
 .faq-answer-wrap {
@@ -485,7 +555,7 @@ footer .copyright {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 14px;
+  gap: 7px;
 }
 
 .value-list li {
@@ -505,10 +575,226 @@ footer .copyright {
   transform: translateY(-2px);
 }
 
+/* ---------------- Section rhythm variants ----------------
+   Each section keeps the same eyebrow/h2/body grammar, but
+   width, alignment, and density vary so a long scroll doesn't
+   read as one repeating block. */
+
+/* Philosophy: narrower column, slightly intimate. */
+.section-intimate {
+  max-width: 540px;
+}
+
+/* Technique: real sequence, so numbering carries information
+   (the order of the four phases matters). */
+.technique-steps {
+  display: grid;
+  gap: 0;
+  counter-reset: phase;
+  margin-top: 8px;
+}
+
+.technique-step {
+  counter-increment: phase;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 18px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.technique-step:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.technique-step::before {
+  content: counter(phase, decimal-leading-zero);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  color: var(--text-4);
+  padding-top: 2px;
+}
+
+.technique-step-title {
+  color: var(--text-1);
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.technique-step-body {
+  margin: 0;
+  color: var(--text-3);
+}
+
+/* Value prop: wide and centered — a breathing-room pause
+   between the dense technique list and the "doesn't have" card. */
+.section-breathing-room {
+  text-align: center;
+}
+
+.section-breathing-room .value-list {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* "Doesn't have" card: slightly stronger fill so it reads as
+   a deliberate pause/contrast block, not just another list. */
+.card-emphasis {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
 .contact-email {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-size: 18px;
   color: var(--text-1);
+}
+
+/* ---------------- Alternating split layout ----------------
+   Used for the four mid-page sections (benefits, doesn't-have,
+   how it works, technique, why willy) so a long scroll reads as
+   a left/right rhythm instead of one repeating centered column.
+   Each .split-section has a text side and a visual side; the
+   visual is a quiet echo of the hero's breathing circles —
+   static, not another shape language. */
+
+.split-wide {
+  max-width: 980px;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+@media (min-width: 760px) {
+  .split-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+
+  .split-section.split-flip {
+    direction: rtl;
+  }
+
+  .split-section.split-flip > * {
+    direction: ltr;
+  }
+}
+
+.split-text {
+  min-width: 0;
+}
+
+.split-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* The shared circle motif: a large, quiet, static ring that
+   echoes the hero's breathing circles without animating —
+   it anchors each section visually without competing for
+   attention with the text. */
+.anchor-ring {
+  position: relative;
+  width: clamp(160px, 20vw, 220px);
+  height: clamp(160px, 20vw, 220px);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.anchor-ring .anchor-number {
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 1;
+}
+
+.anchor-ring .anchor-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+@media (max-width: 759px) {
+  .split-visual {
+    order: -1;
+  }
+  .anchor-ring {
+    width: 140px;
+    height: 140px;
+  }
+  .anchor-ring .anchor-number {
+    font-size: 32px;
+  }
+}
+
+/* Two-circle stack for the "Why Willy" section — echoes the
+   logo (small circle above, large circle below) and the hero's
+   breathing circles, but static: a quiet visual signature rather
+   than a competing animation. */
+.why-circles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 20px 24px;
+  background: transparent;
+}
+
+.why-circle {
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.why-circle span {
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 300;
+  letter-spacing: 0.4px;
+  color: var(--text-1);
+  padding: 0 16px;
+}
+
+.why-circle-chest {
+  width: clamp(108px, 11vw, 128px);
+  height: clamp(108px, 11vw, 128px);
+  background: var(--circle-chest);
+}
+
+.why-circle-belly {
+  width: clamp(140px, 14.5vw, 168px);
+  height: clamp(140px, 14.5vw, 168px);
+  background: var(--circle-belly);
+}
+
+@media (max-width: 759px) {
+  .why-circle-chest {
+    width: 100px;
+    height: 100px;
+  }
+  .why-circle-belly {
+    width: 128px;
+    height: 128px;
+  }
 }

@@ -12,9 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
 
     revealEls.forEach((el) => observer.observe(el));
+
+    // Safety net: anything already on screen at load (e.g. content
+    // sitting just below the hero on shorter viewports) should show
+    // immediately rather than waiting for a scroll event to fire.
+    revealEls.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('is-visible');
+        observer.unobserve(el);
+      }
+    });
   } else {
     revealEls.forEach((el) => el.classList.add('is-visible'));
   }
