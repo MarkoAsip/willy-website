@@ -11,6 +11,8 @@
   --text-3: rgba(255, 255, 255, 0.38);   /* tertiary  */
   --text-4: rgba(255, 255, 255, 0.24);   /* muted     */
 
+  --accent: #e0a96d;   /* warm accent — used sparingly on eyebrow labels only */
+
   --card-fill: rgba(255, 255, 255, 0.05);
   --card-fill-hover: rgba(255, 255, 255, 0.07);
   --card-border: rgba(255, 255, 255, 0.07);
@@ -144,7 +146,7 @@ img {
   font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: var(--accent);
   font-weight: 400;
 }
 
@@ -170,6 +172,8 @@ h2 {
 p {
   color: var(--text-2);
   font-weight: 300;
+  margin-top: 9px;
+  margin-bottom: 9px;
 }
 
 .muted {
@@ -212,6 +216,19 @@ p {
   pointer-events: none;
 }
 
+.badge-disabled {
+  display: inline-block;
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+.store-badge {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
 .card {
   background: var(--card-fill);
   border: 1px solid var(--card-border);
@@ -222,8 +239,8 @@ p {
 /* ---------------- Sections / fade-in on scroll ---------------- */
 
 section.wrap {
-  padding-top: 65px;
-  padding-bottom: 65px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .reveal {
@@ -256,6 +273,26 @@ hr.divider {
   justify-content: center;
   gap: 35px;
   padding: 32px 0 12px;
+}
+
+.breath-small {
+  gap: 26px;
+  padding: 0;
+}
+
+.breath-small .breath-chest {
+  width: clamp(110px, 12.6vw, 128px);
+  height: clamp(110px, 12.6vw, 128px);
+}
+
+.breath-small .breath-belly {
+  width: clamp(140px, 16vw, 166px);
+  height: clamp(140px, 16vw, 166px);
+}
+
+.breath-small .breath-label {
+  font-size: clamp(13px, 1.4vw, 15px);
+  padding: 0 12px;
 }
 
 .breath-circle {
@@ -382,26 +419,7 @@ hr.divider {
   letter-spacing: 0.5px;
 }
 
-/* ---------------- Hero scroll cue ---------------- */
 
-.scroll-cue {
-  display: flex;
-  justify-content: center;
-  margin-top: 72px;
-}
-
-.scroll-cue-line {
-  width: 1px;
-  height: 46px;
-  transform-origin: top center;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.28), rgba(255,255,255,0));
-  animation: scrollCuePulse 3.2s var(--ease-organic) infinite;
-}
-
-@keyframes scrollCuePulse {
-  0%, 100% { transform: scaleY(0.65); opacity: 0.35; }
-  50%      { transform: scaleY(1.13); opacity: 0.85; }
-}
 
 /* ---------------- Footer ---------------- */
 
@@ -555,7 +573,7 @@ footer .copyright {
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 7px;
+  gap: 2px;
 }
 
 .value-list li {
@@ -596,10 +614,7 @@ footer .copyright {
 
 .technique-step {
   counter-increment: phase;
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 18px;
-  padding: 20px 0;
+  padding: 10px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -607,18 +622,9 @@ footer .copyright {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.technique-step::before {
-  content: counter(phase, decimal-leading-zero);
-  font-size: 13px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  color: var(--text-4);
-  padding-top: 2px;
-}
-
 .technique-step-title {
   color: var(--text-1);
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   font-size: 16px;
   font-weight: 400;
 }
@@ -745,56 +751,14 @@ footer .copyright {
   }
 }
 
-/* Two-circle stack for the "Why Willy" section — echoes the
-   logo (small circle above, large circle below) and the hero's
-   breathing circles, but static: a quiet visual signature rather
-   than a competing animation. */
-.why-circles {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  width: fit-content;
-  margin: 0 auto;
-  padding: 20px 24px;
-  background: transparent;
-}
-
-.why-circle {
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.why-circle span {
-  font-size: clamp(13px, 1.4vw, 15px);
+/* Large, thin "willy" wordmark echo for the "Why Willy" section —
+   a quiet visual signature, not a competing shape. Sits low in
+   opacity so it reads as a watermark, not a heading. */
+.why-wordmark {
+  font-size: clamp(56px, 8vw, 100px);
   font-weight: 300;
-  letter-spacing: 0.4px;
-  color: var(--text-1);
-  padding: 0 16px;
-}
-
-.why-circle-chest {
-  width: clamp(108px, 11vw, 128px);
-  height: clamp(108px, 11vw, 128px);
-  background: var(--circle-chest);
-}
-
-.why-circle-belly {
-  width: clamp(140px, 14.5vw, 168px);
-  height: clamp(140px, 14.5vw, 168px);
-  background: var(--circle-belly);
-}
-
-@media (max-width: 759px) {
-  .why-circle-chest {
-    width: 100px;
-    height: 100px;
-  }
-  .why-circle-belly {
-    width: 128px;
-    height: 128px;
-  }
+  letter-spacing: 2px;
+  color: var(--text-4);
+  text-align: center;
+  width: 100%;
 }
