@@ -15,9 +15,13 @@
     <a href="index.html" class="nav-logo" aria-label="willy home">
       <img src="assets/willy_logo.png" alt="willy" />
     </a>
-    <ul class="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="#getting-willy">Getting Willy</a></li>
+      <li><a href="about.html">About Willy</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="support.html">Support</a></li>
     </ul>
@@ -26,7 +30,7 @@
   <!-- ============ HERO ============ -->
   <header class="wrap hero" style="padding-top: 32px;">
     <div style="text-align:center;">
-      <p style="max-width: 480px; margin: 10px auto 32px; font-size: 30px; color: #ffffff;"><strong style="color: #e0a96d;">Taking a deep breath does incredible things.</strong> But how often do you actually remember to do it?</p>
+      <p class="eyebrow" style="margin-bottom: 22px;">one conscious breath</p>
 
       <div class="breath" aria-hidden="true">
         <div class="breath-circle breath-chest">
@@ -41,9 +45,7 @@
         </div>
       </div>
 
-      <p class="eyebrow" style="margin-top: 28px; margin-bottom: 16px;">one conscious breath</p>
-
-      <h1 style="margin-top: 40px;">Willy—a gentle reminder<br />to pause</h1>
+      <h1 style="margin-top: 40px;">A gentle reminder<br />to pause</h1>
 
       <p style="max-width: 480px; margin: 22px auto 0; font-size: 16px;">
         A few times a day, your phone softly vibrates and invites you to take
@@ -72,16 +74,17 @@
   <section class="wrap split-wide reveal">
     <div class="split-section">
       <div class="split-text">
-        <p class="eyebrow">what it does</p>
-        <h2 style="margin-top: 16px; margin-bottom: 28px;">Small moments, regularly</h2>
+        <h2 style="margin-top: 16px; margin-bottom: 20px; color: #e0a96d;">Deep breathing throughout your day.</h2>
 
-        <ul class="value-list">
-          <li><span class="dot"></span> Interrupt stress patterns</li>
-          <li><span class="dot"></span> Reconnect with the body</li>
-          <li><span class="dot"></span> Create micro moments of calm</li>
-          <li><span class="dot"></span> Regulate the nervous system</li>
-          <li><span class="dot"></span> Feel more physically present throughout the day</li>
-        </ul>
+        <p>How often do you remember to take a deep breath?</p>
+
+        <p style="margin-top: 4px; font-style: italic;">Even when you know how incredible it feels.</p>
+
+        <p style="margin-top: 12px;">Willy was created to bring more of those calming moments into your day.</p>
+
+        <p style="margin-top: 12px;"><strong>The result?</strong></p>
+
+        <p style="margin-top: 12px; margin-bottom: 24px;">More calm. More presence. More moments that matter.</p>
       </div>
       <div class="split-visual" aria-hidden="true">
         <div class="anchor-ring">
@@ -92,25 +95,31 @@
     </div>
   </section>
 
-  <!-- ============ HOW IT WORKS ============ -->
+  <!-- ============ WHAT IT DOESN'T HAVE ============ -->
   <section class="wrap split-wide reveal">
     <div class="split-section split-flip">
       <div class="split-text">
-        <p class="eyebrow">how it works</p>
-        <h2 style="margin-top: 16px; margin-bottom: 28px;">Set it once, forget it</h2>
+        <h2 style="margin-top: 16px; margin-bottom: 28px; color: #e0a96d;">No streaks. No accounts. No noise.</h2>
 
         <p>
-          Choose a reminder interval — every 30, 60, or 90 minutes — and set your
-          active hours. Willy sends a gentle notification at each
-          interval. Take one conscious breath, and continue your day. Everything
-          runs locally on your phone, offline, with nothing to set up beyond
-          that.
+          Technology should not always stimulate — sometimes it should regulate.
+          Willy is designed to feel calm, quiet, warm, almost invisible. It
+          should never feel addictive, overwhelming, gamified, or
+          productivity‑driven.
         </p>
+
+        <ul class="value-list" style="margin-top: 28px;">
+          <li><span class="dot"></span> No accounts or profiles</li>
+          <li><span class="dot"></span> No streaks or achievements</li>
+          <li><span class="dot"></span> No statistics dashboards</li>
+          <li><span class="dot"></span> No breathing programs or AI coaching</li>
+          <li><span class="dot"></span> No social features</li>
+        </ul>
       </div>
       <div class="split-visual" aria-hidden="true">
         <div class="anchor-ring">
-          <span class="anchor-number" style="font-size: clamp(22px, 3vw, 28px);">30-60-90</span>
-          <span class="anchor-label">minute intervals</span>
+          <span class="anchor-number">5</span>
+          <span class="anchor-label">things left out</span>
         </div>
       </div>
     </div>
@@ -120,28 +129,30 @@
   <section class="wrap split-wide reveal" id="technique">
     <div class="split-section">
       <div class="split-text">
-        <p class="eyebrow">the willy technique</p>
-        <h2 style="margin-top: 16px; margin-bottom: 8px;">Four phases, one breath</h2>
-        <p class="muted" style="margin-bottom: 8px;">A breathing method that creates an immediate sense of calm by activating the vagus nerve — your body's natural stress off-switch. <br> <br> TRY IT NOW: </p>
+        <h2 style="margin-top: 16px; margin-bottom: 8px; color: #e0a96d;">Do it like this.</h2>
+        <p class="muted" style="margin-bottom: 8px;">Introducing <strong>The Willy Technique</strong>.</p>
+        <p class="muted" style="margin-bottom: 8px;">Simple to learn. Easy to remember.</p>
+        <p class="muted" style="margin-bottom: 16px;">Designed to create an immediate sense of calm.</p>
 
         <div class="technique-steps">
-          <div class="technique-step">
+          <div class="technique-step" style="margin-bottom: 2px;">
             <p class="technique-step-title">1. Belly out</p>
             <p class="technique-step-body">Breathe in through your nose. Let your belly fill first.</p>
           </div>
-          <div class="technique-step">
+          <div class="technique-step" style="margin-bottom: 2px;">
             <p class="technique-step-title">2. Chest up</p>
             <p class="technique-step-body">Keep breathing in. Let your chest rise.</p>
           </div>
-          <div class="technique-step">
+          <div class="technique-step" style="margin-bottom: 2px;">
             <p class="technique-step-title">3. Hold and feel</p>
             <p class="technique-step-body">Pause. Hold. Notice the relaxation.</p>
           </div>
-          <div class="technique-step">
+          <div class="technique-step" style="margin-bottom: 2px;">
             <p class="technique-step-title">4. Release</p>
             <p class="technique-step-body">Breathe out slowly through your mouth. Chest first, then belly.</p>
           </div>
         </div>
+        <p class="eyebrow" style="margin-top: 20px;">Try it now.</p>
       </div>
       <div class="split-visual" aria-hidden="true">
         <div class="breath breath-small">
@@ -160,81 +171,33 @@
     </div>
   </section>
 
-  <!-- ============ WHAT IT DOESN'T HAVE ============ -->
+  <!-- ============ HOW IT WORKS ============ -->
   <section class="wrap split-wide reveal">
     <div class="split-section split-flip">
       <div class="split-text">
-        <p class="eyebrow">what willy intentionally does not have</p>
-        <h2 style="margin-top: 16px; margin-bottom: 28px;">No streaks. No accounts. No noise.</h2>
+        <h2 style="margin-top: 16px; margin-bottom: 28px; color: #e0a96d;">Set it once, forget it</h2>
 
         <p>
-          Technology should not always stimulate — sometimes it should regulate.
-          Willy is designed to feel calm, quiet, warm, almost invisible. It
-          should never feel addictive, overwhelming, gamified, or
-          productivity‑driven.
+          Choose a reminder interval — every 30, 60, or 90 minutes — and set your
+          active hours. Willy sends a gentle notification at each
+          interval. Take one conscious breath, and continue your day. Everything
+          runs locally on your phone, offline, with nothing to set up beyond
+          that.
         </p>
-
-        <ul class="value-list" style="margin-top: 28px;">
-          <li><span class="dot"></span> No accounts or profiles</li>
-          <li><span class="dot"></span> No streaks or achievements</li>
-          <li><span class="dot"></span> No statistics dashboards</li>
-          <li><span class="dot"></span> No social features</li>
-          <li><span class="dot"></span> No breathing programs or AI coaching</li>
-          <li><span class="dot"></span> No gamification</li>
-          <li><span class="dot"></span> No aggressive notifications</li>
-        </ul>
       </div>
       <div class="split-visual" aria-hidden="true">
         <div class="anchor-ring">
-          <span class="anchor-number">7</span>
-          <span class="anchor-label">things left out</span>
+          <span class="anchor-number" style="font-size: clamp(22px, 3vw, 28px);">30-60-90</span>
+          <span class="anchor-label">minute intervals</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ ORIGIN / PHILOSOPHY ============ -->
-  <section class="wrap split-wide reveal">
-    <div class="split-section">
-      <div class="split-text section-intimate">
-        <p class="eyebrow">why willy</p>
-        <h2 style="margin-top: 16px; margin-bottom: 28px;">Willy was born out of a simple personal need.</h2>
-
-        <p>
-          I love deep breathing. I know what it does for the body and mind. But
-          somewhere between meetings, emails, and the general noise of the day —
-          I kept forgetting to do it.
-        </p>
-        <p>
-          So I built a reminder. Something gentle, non-intrusive, that would
-          nudge me a few times a day to just stop and take one conscious breath.
-        </p>
-        <p>
-          While exploring different breathing techniques, I kept coming back to
-          one — the belly-first, chest-expanding method that activates the vagus
-          nerve. Of everything I tried, nothing worked as quickly or as reliably
-          for an on-the-go reset. You feel the difference immediately.
-        </p>
-        <p>
-          That became <a href="#technique">the Willy Technique</a>.
-        </p>
-        <p>
-          Willy is not a wellness platform. No big promises. Just a quiet
-          companion — reminding you, a few times a day, to come back to
-          yourself. You won't be asked how you feel. You'll just feel it.
-        </p>
-        <p style="color: var(--text-1);">One conscious breath at a time.</p>
-      </div>
-      <div class="split-visual" aria-hidden="true">
-        <div class="why-wordmark">willy</div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ GETTING WILLY ============ -->
-  <section class="wrap reveal" id="getting-willy" style="text-align:center;">
+  <section class="wrap reveal" id="getting-willy" style="text-align:center; padding-top: 40px;">
     <p class="eyebrow">getting willy</p>
-    <h2 style="margin-top: 16px; margin-bottom: 18px;">Curious how it actually works?</h2>
+    <h2 style="margin-top: 16px; margin-bottom: 18px;">Ready to try it?</h2>
     <p style="max-width: 440px; margin: 0 auto;">
       Download Willy from Google Play or the App Store, try it for free, and
       turn on the reminders if it feels right.
@@ -275,6 +238,7 @@
     <div class="wordmark">willy</div>
     <ul class="footer-links">
       <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="privacy.html">Privacy</a></li>
       <li><a href="terms.html">Terms</a></li>
