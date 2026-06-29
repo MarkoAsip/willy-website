@@ -103,7 +103,7 @@ img {
 }
 
 .nav-logo img {
-  height: 65px;
+  height: 85px;
   width: auto;
 }
 
@@ -714,8 +714,8 @@ footer .copyright {
    attention with the text. */
 .anchor-ring {
   position: relative;
-  width: clamp(160px, 20vw, 220px);
-  height: clamp(160px, 20vw, 220px);
+  width: clamp(187px, 23.4vw, 257px);
+  height: clamp(187px, 23.4vw, 257px);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.045);
   border: 1px solid rgba(255, 255, 255, 0.07);
@@ -727,7 +727,7 @@ footer .copyright {
 }
 
 .anchor-ring .anchor-number {
-  font-size: clamp(36px, 5vw, 48px);
+  font-size: clamp(42px, 5.85vw, 56px);
   font-weight: 300;
   color: var(--text-2);
   line-height: 1;
@@ -745,11 +745,11 @@ footer .copyright {
     order: -1;
   }
   .anchor-ring {
-    width: 140px;
-    height: 140px;
+    width: 164px;
+    height: 164px;
   }
   .anchor-ring .anchor-number {
-    font-size: 32px;
+    font-size: 38px;
   }
 }
 
