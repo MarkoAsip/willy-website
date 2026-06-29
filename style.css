@@ -241,6 +241,7 @@ p {
 section.wrap {
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .reveal {
@@ -796,8 +797,19 @@ footer .copyright {
 }
 
 @media (max-width: 640px) {
+  .nav {
+    position: relative;
+  }
+
   .hamburger {
     display: flex;
+    order: -1;
+  }
+
+  .nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .nav-links {
